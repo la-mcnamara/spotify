@@ -1,0 +1,5 @@
+# python 3.9
+
+pandas==1.5.2
+jupyterlab==3.5.2
+spotipy==2.22.0
