@@ -35,20 +35,21 @@ def read_spotify_json_data(path):
     return json_df_dict
 
 
-def aggregate_music(streaming_df, grouping):
+def aggregate_music(streaming_df, grouping, count):
     """Aggregate music history by grouping variable
 
     Args:
         streaming_df: dataframe with streaming data
-        grouping: grouping variable (artistName, trackName)
+        grouping: grouping variable (artistName, trackName, trackid)
+        count: variable to count (artistName, trackName)
 
     Returns:
         agg_df: dataframe aggregated
     """
 
     agg_df = streaming_df.groupby(grouping) \
-                         .agg({grouping: 'count', 'msPlayed': 'sum'})  \
-                         .rename(columns={grouping: 'count_played'})    \
+                         .agg({count: 'count', 'msPlayed': 'sum'})  \
+                         .rename(columns={count: 'count_played'})    \
                          .reset_index()
 
     agg_df['min_played'] = agg_df['msPlayed'] / 60000
